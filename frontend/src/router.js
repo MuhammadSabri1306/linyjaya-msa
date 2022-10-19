@@ -3,7 +3,8 @@ import Home from "./views/Home.vue";
 
 const useBuildPath = false;
 const routes = {
-    home: { path: "/", component: Home }
+    home: { path: "/", component: Home },
+    login: { path: "/login", component: Home }
 };
 
 const defineMyRouter = routesObj => {

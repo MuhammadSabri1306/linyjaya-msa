@@ -1,11 +1,15 @@
 <script setup>
+import { computed } from "vue";
+import { useRoute } from "vue-router";
 import AnimationParticles from "@/components/AnimationParticles.vue";
 import SvgLjiLogo from "@/assets/SvgLjiLogo.svg";
 import SvgBgDot from "@/assets/SvgBgDot.svg";
 
+const route = useRoute();
+const isHomePage = computed(() => route.name == "home");
 </script>
 <template>
-	<div class="relative">
+	<div class="relative w-screen h-screen overflow-hidden">
 		<AnimationParticles class="h-screen" />
 		<div class="layer flex">
 			<div class="w-36 mt-auto text-yellow-300 p-8">
@@ -26,28 +30,27 @@ import SvgBgDot from "@/assets/SvgBgDot.svg";
 				<h1 class="text-3xl text-center text-slate-900 font-sans">Selamat datang di Office Management System</h1>
 				<h1 class="text-7xl text-center text-slate-900 font-bold heading-style mb-8">LINY <span class="text-blue-900">JAYA</span> INFORMATIKA</h1>
 				<div class="flex justify-center">
-					<a href="#" class="btn-primary">
+					<RouterLink to="/login" class="btn-primary">
 						Mulai
 						<div class="arrow-wrapper">
 							<div class="arrow"></div>
 						</div>
-					</a>
+					</RouterLink>
 				</div>
 			</div>
 		</div>
-		<!-- <div class="layer flex p-4 md:p-8 gap-4 md:gap-8 bg-gradient-to-r from">
-			<div class="mt-auto">
-				<SvgTeamBuilding class="w-[25rem]" />
-			</div>
-			<div class="grow flex">
-				<div class="m-auto">
-					<h3 class="font-body text-black/80 text-4xl font-bold">OFFICE MANAGEMENT APPS</h3>
-				</div>
-			</div>
-		</div> -->
+		<div :class="{ 'layer-bg-form': !isHomePage }" class="blur-circle"></div>
 	</div>
 </template>
 <style scoped>
+
+.blur-circle {
+	@apply absolute w-[10rem] h-[10rem] -right-8 -bottom-8 bg-gradient-to-tl from-red-500 to-red-500 rounded-tl-full blur-[4px] transition-all duration-300 ease-in;
+}
+
+.blur-circle.layer-bg-form {
+	@apply w-full h-full right-0 bottom-0 from-rose-500 to-red-500 rounded-none blur-0;
+}
 
 .layer {
 	@apply fixed w-full h-full left-0 top-0;
@@ -81,13 +84,7 @@ import SvgBgDot from "@/assets/SvgBgDot.svg";
 
 /* From uiverse.io by @satyamchaudharydev */
 .btn-primary {
-	@apply text-lg rounded text-white box-border rounded-lg text-white px-4 py-2 flex items-center gap-[0.6em] font-bold transition-colors duration-200 bg-blue-700 hover:bg-slate-900;
-
-  --primary-color: #645bff;
-  --secondary-color: #fff;
-  --hover-color: #111;
-  --arrow-width: 10px;
-  --arrow-stroke: 2px;
+	@apply text-xl rounded text-white box-border rounded text-white px-4 py-2 flex items-center gap-[0.6em] font-bold transition-colors duration-200 bg-blue-700 hover:bg-slate-900;
 }
 
 .btn-primary .arrow-wrapper {
