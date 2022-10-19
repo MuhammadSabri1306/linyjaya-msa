@@ -2,13 +2,14 @@ import { fileURLToPath, URL } from "url";
 import dns from "dns";
 import copyUrl from "./copy-url";
 import { defineConfig } from "vite";
+import svgLoader from "vite-svg-loader";
 import vue from "@vitejs/plugin-vue";
 
 dns.setDefaultResultOrder("verbatim");
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode, ssrBuild }) => {
-    const plugins = [vue()],
+    const plugins = [vue(), svgLoader()],
         base = (command == "serve") ? "/" : "/",
         resolve = {
             alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) }
