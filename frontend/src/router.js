@@ -1,29 +1,14 @@
-import { createRouter, createWebHistory } from "vue-router";
-import Home from "./views/Home.vue";
+import { defineMyRouter } from "@/modules/defineMyRouter";
+
+import Home from "@/views/Home.vue";
+import Dashboard from "@/views/Dashboard.vue";
 
 const useBuildPath = false;
 const routes = {
     home: { path: "/", component: Home },
-    login: { path: "/login", component: Home }
+    login: { path: "/login", component: Home },
+    register: { path: "/register", component: Home },
+    dashboard: { path: "/app", component: Dashboard }
 };
 
-const defineMyRouter = routesObj => {
-    const routes = Object.entries(routesObj).map(([name, item]) => {
-        return { name, ...item };
-    });
-
-    const basepath = useBuildPath ? "/" : "/";
-    const history = createWebHistory(basepath);
-
-    return createRouter({
-        history,
-        routes,
-        scrollBehavior(to, from, savedPosition){
-            if(savedPosition)
-                return savedPosition;
-            else return { top: 0 };
-        }
-    });
-};
-
-export default defineMyRouter(routes);
+export default defineMyRouter(routes, useBuildPath);
