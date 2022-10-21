@@ -11,10 +11,10 @@ const userData = reactive({
 });
 </script>
 <template>
-	<div class="flex flex-col items-stretch min-h-screen">
+	<div id="baseLayout" class="flex flex-col items-stretch min-h-screen">
 		<header class="py-12 px-4 bg-blue-900">
 			<div class="md:container lg:container-none xl:container lg:w-[80%] xl:w-auto mx-auto flex gap-x-12 gap-y-8">
-				<div>
+				<div class="my-auto">
 					<div class="flex items-center gap-4">
 						<div>
 							<div class="user-picture" :style="{ backgroundImage: 'url(' + userData.img + ')' }"></div>
@@ -34,28 +34,28 @@ const userData = reactive({
 				<nav class="mt-auto grow">
 					<ul class="list-none topnav-menu">
 						<li class="topnav-item">
-							<a href="#">
+							<RouterLink to="/app/inventory">
 								<ArchiveBoxIcon class="topnav-icon" />
 								<span>Data Inventaris</span>
-							</a>
+							</RouterLink>
 						</li>
 						<li class="topnav-item">
-							<a href="#">
+							<RouterLink to="/app/report">
 								<DocumentTextIcon class="topnav-icon" />
-								<span>Laporan Harian</span>
-							</a>
+								<span>Pengajuan</span>
+							</RouterLink>
 						</li>
 						<li class="topnav-item">
-							<a href="#">
+							<RouterLink to="/app/attendance">
 								<HandRaisedIcon class="topnav-icon" />
-								<span>Absensi</span>
-							</a>
+								<span>Absensi Kehadiran</span>
+							</RouterLink>
 						</li>
 						<li class="topnav-item">
-							<a href="#">
+							<RouterLink to="/app/finance/debit">
 								<ArchiveBoxIcon class="topnav-icon" />
 								<span>Laporan Keuangan</span>
-							</a>
+							</RouterLink>
 						</li>
 					</ul>
 				</nav>

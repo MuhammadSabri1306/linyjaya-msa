@@ -1,5 +1,5 @@
 <template>
 	<div class="container">
-		<h3 class="page-heading mb-8">Dashboard</h3>
+		<h3 class="page-heading mb-8">Inventaris</h3>
 	</div>
 </template>

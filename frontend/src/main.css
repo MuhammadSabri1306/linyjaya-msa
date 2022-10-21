@@ -44,4 +44,8 @@
 	.layer {
 		@apply absolute w-full h-full left-0 top-0;
 	}
+
+	#baseLayout .page-heading {
+		@apply font-display uppercase text-4xl font-bold text-slate-900 tracking-wider
+	}
 }
