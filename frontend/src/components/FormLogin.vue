@@ -4,8 +4,10 @@ import { useRouter } from "vue-router";
 import { getFormData } from "@/modules/getFormData";
 import SvgLjiLogo from "@/assets/SvgLjiLogo.svg";
 import { ArrowLongLeftIcon } from "@heroicons/vue/24/solid";
+import { useUserStore } from "@/stores/user";
 
 const router = useRouter();
+const userStore = useUserStore();
 const isLoading = ref(false);
 
 const onSubmit = event => {
@@ -16,7 +18,9 @@ const onSubmit = event => {
 	event.preventDefault();
 	isLoading.value = true;
 
-	if(data.username == "user123" && data.password == "user123") {
+	const isLoginSuccess = userStore.login(data.username, data.password);
+
+	if(isLoginSuccess) {
 		router.push("/app");
 		return;
 	}

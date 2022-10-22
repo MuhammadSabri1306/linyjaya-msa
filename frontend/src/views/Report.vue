@@ -1,5 +1,5 @@
 <script setup>
-import BaseLayoutTabs from "@/components/BaseLayoutTabs.vue";
+import BaseLayoutTabs from "@/components/BaseLayout/Tabs.vue";
 
 const tabItems = [
 	{ target: "/app/report", title: "Summary" },

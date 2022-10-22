@@ -1,10 +1,10 @@
 <script setup>
 import { computed } from "vue";
 import { useRoute } from "vue-router";
-import AnimationParticles from "@/components/AnimationParticles.vue";
+import { useUserStore } from "@/stores/user";
+import BackgroundAnimated from "@/components/BackgroundAnimated.vue";
 import GradientFullColors from "@/components/GradientFullColors.vue";
 import SvgLjiLogo from "@/assets/SvgLjiLogo.svg";
-import SvgBgDot from "@/assets/SvgBgDot.svg";
 import FormLogin from "@/components/FormLogin.vue";
 import FormRegister from "@/components/FormRegister.vue";
 
@@ -13,33 +13,30 @@ const route = useRoute();
 const isPage = computed(() => {
 	return page => route.name == page;
 });
+
+const userStore = useUserStore();
+const btnStartDest = computed(() => userStore.hasLogin ? "/app" : "/login");
 </script>
 <template>
 	<div class="relative w-screen h-screen overflow-hidden">
 		<Transition name="animate-section-home">
 			<div v-if="isPage('home')" class="scale-100 origin-top transition-scale duration-300 ease-in-out">
-				<AnimationParticles class="h-screen" />
-				<div class="layer flex">
-					<div class="w-36 mt-auto text-yellow-300 p-8">
-						<SvgBgDot />
-					</div>
-				</div>
-				<div class="absolute w-[10rem] h-[10rem] -right-8 -bottom-8 bg-gradient-to-tl from-red-500 to-red-500 rounded-tl-full blur-[4px]"></div>
+				<BackgroundAnimated />
 				<div class="layer flex flex-col items-stretch">
 					<nav class="container">
 						<div class="flex items-stretch justify-center gap-6">
-							<a href="#" class="topnav-link">Data Inventaris</a>
-							<a href="#" class="topnav-link">Laporan Harian</a>
+							<a href="#" class="topnav-link hidden md:inline">Data Inventaris</a>
+							<a href="#" class="topnav-link hidden md:inline">Laporan Harian</a>
 							<div class="topnav-brand"><SvgLjiLogo /></div>
-							<a href="#" class="topnav-link">Absensi Karyawan</a>
-							<a href="#" class="topnav-link">Laporan Keuangan</a>
+							<a href="#" class="topnav-link hidden md:inline">Absensi Karyawan</a>
+							<a href="#" class="topnav-link hidden md:inline">Laporan Keuangan</a>
 						</div>
 					</nav>
 					<div class="my-auto p-8">
-						<h1 class="text-3xl text-center text-slate-900 font-sans">Selamat datang di Office Management System</h1>
-						<h1 class="text-7xl text-center text-slate-900 font-bold heading-style mb-8">LINY <span class="text-blue-900">JAYA</span> INFORMATIKA</h1>
+						<h1 class="text-xl md:text-3xl text-center text-slate-900 font-sans mb-4 md:mb-0">Selamat datang di Office Management System</h1>
+						<h1 class="text-5xl md:text-7xl text-center text-slate-900 font-bold heading-style mb-8">LINY <span class="text-blue-900">JAYA</span> INFORMATIKA</h1>
 						<div class="flex justify-center">
-							<RouterLink to="/login" class="btn-primary">
+							<RouterLink :to="btnStartDest" class="btn-primary">
 								Mulai
 								<div class="arrow-wrapper">
 									<div class="arrow"></div>
@@ -76,11 +73,11 @@ const isPage = computed(() => {
 }
 
 .topnav-brand > svg {
-	@apply h-8 w-auto m-auto;
+	@apply h-6 md:h-8 w-auto m-auto;
 }
 
 .topnav-link {
-	@apply text-lg text-blue-900 font-medium mt-2 py-2 px-4 relative;
+	@apply text-lg text-center text-blue-900 font-medium mt-2 py-2 px-4 relative;
 }
 
 .topnav-link:focus:after,
@@ -99,7 +96,7 @@ const isPage = computed(() => {
 
 /* From uiverse.io by @satyamchaudharydev */
 .btn-primary {
-	@apply text-xl rounded text-white box-border rounded text-white px-4 py-2 flex items-center gap-[0.6em] font-bold transition-colors duration-200 bg-blue-700 hover:bg-slate-900;
+	@apply text-xl rounded text-white box-border rounded-lg lg:rounded text-white px-6 lg:px-4 py-3 lg:py-2 flex items-center gap-[0.6em] font-bold transition-colors duration-200 bg-blue-700 hover:bg-slate-900;
 }
 
 .btn-primary .arrow-wrapper {

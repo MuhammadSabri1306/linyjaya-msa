@@ -1,14 +1,16 @@
 <script setup>
-import { reactive } from "vue";
-import { ArchiveBoxIcon, DocumentTextIcon, HandRaisedIcon } from "@heroicons/vue/24/outline";
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+import { ArchiveBoxIcon, DocumentTextIcon, HandRaisedIcon, HomeIcon, ArrowTrendingUpIcon } from "@heroicons/vue/24/outline";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/vue/20/solid";
 import SvgLjiLogo from "@/assets/SvgLjiLogo.svg";
+import { useUserStore } from "@/stores/user";
 
-const userData = reactive({
-	name: "Kurt Cobain",
-	status: "Web Programmer",
-	img: "/img/user-pic-sample.webp"
-});
+const userStore = useUserStore();
+const userData = computed(() => userStore.user);
+
+const route = useRoute();
+const isDashboardPage = computed(() => route.name == "dashboard");
 </script>
 <template>
 	<div id="baseLayout" class="flex flex-col items-stretch min-h-screen">
@@ -17,7 +19,7 @@ const userData = reactive({
 				<div class="my-auto">
 					<div class="flex items-center gap-4">
 						<div>
-							<div class="user-picture" :style="{ backgroundImage: 'url(' + userData.img + ')' }"></div>
+							<div :class="{ 'opacity-0': !userData.img }" class="user-picture" :style="{ backgroundImage: 'url(' + userData.img + ')' }"></div>
 						</div>
 						<div class="user-data">
 							<h6 class="text-white font-body text-3xl font-bold">{{ userData.name }}</h6>
@@ -53,7 +55,7 @@ const userData = reactive({
 						</li>
 						<li class="topnav-item">
 							<RouterLink to="/app/finance/debit">
-								<ArchiveBoxIcon class="topnav-icon" />
+								<ArrowTrendingUpIcon class="topnav-icon" />
 								<span>Laporan Keuangan</span>
 							</RouterLink>
 						</li>
@@ -61,7 +63,13 @@ const userData = reactive({
 				</nav>
 			</div>
 		</header>
-		<main class="py-8">
+		<main :class="{ 'pt-8': isDashboardPage }">
+			<div v-if="!isDashboardPage" class="container mb-4 mt-8">
+				<RouterLink to="/app" class="inline-flex items-end -ml-4 px-4 py-2 text-sm font-medium transition-colors text-gray-500 hover:text-gray-700">
+					<HomeIcon class="topnav-icon mr-1" />
+					<span>Dashboard</span>
+				</RouterLink>
+			</div>
 			<slot></slot>
 		</main>
 	</div>
