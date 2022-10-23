@@ -25,6 +25,10 @@ export const useUserStore = defineStore("user", {
 
 			return false;
 		},
+		logout() {
+			setSession("data-user", "");
+			this.user = {};
+		},
 		checkFromSession() {
 			let sessionUser = getSession("data-user");
 			if(!sessionUser)

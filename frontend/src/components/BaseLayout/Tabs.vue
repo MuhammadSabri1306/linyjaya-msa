@@ -8,7 +8,7 @@ const props = defineProps({
 const tabAttrs = computed(() => props.items);
 </script>
 <template>
-	<div v-if="tabAttrs.length > 0" class="flex gap-4">
+	<div v-if="tabAttrs.length > 0" class="flex gap-x-4 gap-y-2 flex-wrap">
 		<RouterLink v-for="item in tabAttrs" :to="item.target" class="tab-item">{{ item.title }}</RouterLink>
 	</div>
 </template>

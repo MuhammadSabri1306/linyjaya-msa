@@ -23,7 +23,7 @@
 		@apply font-serif;
 	}
 
-	input:focus, button:focus, select:focus {
+	input:focus, textarea:focus, button:focus, select:focus {
 		@apply outline-none;
 	}
 
@@ -46,6 +46,22 @@
 	}
 
 	#baseLayout .page-heading {
-		@apply font-display uppercase text-4xl font-bold text-slate-900 tracking-wider
+		@apply font-display uppercase text-4xl font-bold text-slate-800 tracking-wider;
+	}
+
+	.card {
+		@apply rounded-2xl lg:rounded;
+	}
+
+	.card:not(.card-unshadow) {
+		@apply shadow;
+	}
+
+	.card:not(.card-unpadding-x) {
+		@apply px-4;
+	}
+
+	.card:not(.card-unpadding-y) {
+		@apply py-4;
 	}
 }

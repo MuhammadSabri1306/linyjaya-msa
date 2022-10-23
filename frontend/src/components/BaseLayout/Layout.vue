@@ -1,21 +1,34 @@
 <script setup>
 import { computed } from "vue";
-import { useRoute } from "vue-router";
-import { ArchiveBoxIcon, DocumentTextIcon, HandRaisedIcon, HomeIcon, ArrowTrendingUpIcon } from "@heroicons/vue/24/outline";
-import { ArrowTopRightOnSquareIcon } from "@heroicons/vue/20/solid";
+import { useRoute, useRouter } from "vue-router";
 import SvgLjiLogo from "@/assets/SvgLjiLogo.svg";
 import { useUserStore } from "@/stores/user";
+import { ArchiveBoxIcon, DocumentTextIcon, HandRaisedIcon, ArrowTrendingUpIcon } from "@heroicons/vue/24/outline";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/vue/20/solid";
 
 const userStore = useUserStore();
 const userData = computed(() => userStore.user);
 
-const route = useRoute();
-const isDashboardPage = computed(() => route.name == "dashboard");
+const router = useRouter();
+const onLogOut = () => {
+	userStore.logout();
+	router.push("/");
+};
 </script>
 <template>
 	<div id="baseLayout" class="flex flex-col items-stretch min-h-screen">
-		<header class="py-12 px-4 bg-blue-900">
-			<div class="md:container lg:container-none xl:container lg:w-[80%] xl:w-auto mx-auto flex gap-x-12 gap-y-8">
+		<header class="hidden md:block bg-blue-900">
+			<div class="bg-black/10">
+				<div class="container">
+					<div class="flex pt-2">
+						<RouterLink to="/" class="navbar-menu">Home</RouterLink>
+						<RouterLink to="/contact" class="navbar-menu">Contact</RouterLink>
+						<RouterLink to="/app" class="navbar-menu">Dashboard</RouterLink>
+						<button @click="onLogOut" type="button" class="navbar-menu ml-auto">Logout</button>
+					</div>
+				</div>
+			</div>
+			<div class="md:container lg:container-none xl:container lg:w-[80%] xl:w-auto mx-auto flex gap-x-12 gap-y-8 pt-16 pb-12 px-4">
 				<div class="my-auto">
 					<div class="flex items-center gap-4">
 						<div>
@@ -44,7 +57,7 @@ const isDashboardPage = computed(() => route.name == "dashboard");
 						<li class="topnav-item">
 							<RouterLink to="/app/report">
 								<DocumentTextIcon class="topnav-icon" />
-								<span>Pengajuan</span>
+								<span>Laporan Harian</span>
 							</RouterLink>
 						</li>
 						<li class="topnav-item">
@@ -56,20 +69,14 @@ const isDashboardPage = computed(() => route.name == "dashboard");
 						<li class="topnav-item">
 							<RouterLink to="/app/finance/debit">
 								<ArrowTrendingUpIcon class="topnav-icon" />
-								<span>Laporan Keuangan</span>
+								<span>Laporan Finansial</span>
 							</RouterLink>
 						</li>
 					</ul>
 				</nav>
 			</div>
 		</header>
-		<main :class="{ 'pt-8': isDashboardPage }">
-			<div v-if="!isDashboardPage" class="container mb-4 mt-8">
-				<RouterLink to="/app" class="inline-flex items-end -ml-4 px-4 py-2 text-sm font-medium transition-colors text-gray-500 hover:text-gray-700">
-					<HomeIcon class="topnav-icon mr-1" />
-					<span>Dashboard</span>
-				</RouterLink>
-			</div>
+		<main class="pt-16">
 			<slot></slot>
 		</main>
 	</div>
@@ -106,6 +113,14 @@ const isDashboardPage = computed(() => route.name == "dashboard");
 
 .topnav-icon {
 	@apply w-6 h-6;
+}
+
+.navbar-menu {
+	@apply px-4 py-2 font-medium text-white/90 transition-all bg-transparent hover:bg-blue-900;
+}
+
+.navbar-menu.router-link-active {
+	@apply bg-blue-900;
 }
 
 </style>

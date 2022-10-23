@@ -13,6 +13,7 @@ const routes = {
     login: { path: "/login", component: Home },
     register: { path: "/register", component: Home },
     dashboard: { path: "/app", component: Dashboard },
+    contact: { path: "/contact", component: Dashboard },
     report: { path: "/app/report/:tab?", component: Report },
     attendance: { path: "/app/attendance/:tab?", component: Attendance },
     inventory: { path: "/app/inventory", component: Inventory },

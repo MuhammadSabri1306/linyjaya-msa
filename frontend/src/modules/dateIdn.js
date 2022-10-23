@@ -19,3 +19,13 @@ export const defineIdDate = dateObj => {
 
 	return { dateObj, date, day, month, year, toStr };
 };
+
+export const toTimeStr = (dateObj, separator = ".") => {
+	let hour = dateObj.getHours();
+	let minutes = dateObj.getMinutes();
+
+	hour = hour.length < 2 ? `0${ hour }` : hour;
+	minutes = minutes.length < 2 ? `0${ minutes }` : minutes;
+
+	return `${ hour }${ separator }${ minutes }`;
+};

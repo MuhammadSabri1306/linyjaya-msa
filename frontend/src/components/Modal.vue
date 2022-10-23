@@ -6,7 +6,8 @@ import { XCircleIcon } from "@heroicons/vue/24/solid";
 const emit = defineEmits(["open", "close"]);
 const props = defineProps({
 	show: { type: Boolean, default: false },
-	freezeBackdrop: { type: Boolean, default: true }
+	freezeBackdrop: { type: Boolean, default: true },
+	widthClass: { type: String, default: "w-[500px]" }
 });
 
 const isShow = ref(false);
@@ -37,7 +38,7 @@ const hasSlotFooter = !!slots.footer;
 <template>
 	<Transition name="fade" :duration="500">
 		<div v-show="isShow" class="modal-wrapper">
-			<div class="modal">
+			<div class="modal" :class="widthClass">
 				<div :class="{ 'border-b': hasSlotHeader }" class="modal-header">
 					<slot name="header"></slot>
 					<button @click="close" :class="{ '-translate-y-1/2 top-1/2': hasSlotHeader, 'top-0': !hasSlotHeader }" class="text-gray-400 hover:text-gray-500 w-10 h-10 inline-flex absolute right-0">
@@ -61,7 +62,7 @@ const hasSlotFooter = !!slots.footer;
 }
 
 .modal {
-	@apply w-[500px] relative top-[100px] mx-auto border overflow-auto box-border bg-white rounded-2xl lg:rounded translate-y-0;
+	@apply relative top-[100px] mx-auto border overflow-auto box-border bg-white rounded-2xl lg:rounded translate-y-0;
 }
 
 .modal-header {
