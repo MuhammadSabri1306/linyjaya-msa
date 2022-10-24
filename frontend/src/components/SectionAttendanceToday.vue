@@ -13,7 +13,7 @@ const onNewAttendance = () => attendanceStore.setFormNewVisibility(true);
 			<div class="mb-8 lg:mb-4 flex items-center">
 				<h6 class="font-bold lg:font-semibold text-xl font-body text-gray-900 md:text-black lg:px-4 drop-shadow-[0_0_2px_#fff]">Absensi Hari Ini</h6>
 				<button @click="onNewAttendance" class="hidden md:inline bg-blue-800 enabled:hover:bg-blue-700 border border-blue-800 text-white shadow px-4 py-2 rounded ml-auto" type="button">Catat Absen</button>
-				<button type="button" class="md:hidden fixed bottom-8 right-8 shadow-custom rounded-full text-white p-3 bg-blue-900 hover:bg-blue-800" @click="onNewAttendance">
+				<button type="button" class="md:hidden fixed bottom-24 right-8 shadow-custom rounded-full text-white p-3 bg-blue-900 hover:bg-blue-800" @click="onNewAttendance">
 					<PlusIcon class="w-8 h-8" />
 				</button>
 			</div>

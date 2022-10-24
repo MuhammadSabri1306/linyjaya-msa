@@ -12,5 +12,5 @@ userStore.checkFromSession();
 </script>
 <template>
     <div><RouterView /></div>
-    <BaseBottomNav />
+    <BaseBottomNav v-if="useBaseLayout" />
 </template>

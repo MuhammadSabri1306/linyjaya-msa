@@ -42,18 +42,18 @@ onUnmounted(() => {
 			<h2 class="text-7xl text-white text-shadow-custom font-bold">Selamat Datang</h2>
 			<h6 class="text-5xl text-red-400 text-shadow-custom font-bold mb-4">Kurt Cobain</h6>
 		</div>
-        <div class="bg-white pt-12 md:pt-0 rounded-t-3xl md:rounded-0 md:bg-gradient-to-b from-blue-900 to-blue-800 min-h-[70vh]">
+        <div class="bg-white pt-12 md:pt-0 rounded-t-3xl md:rounded-0 md:bg-gradient-to-b from-blue-900 to-blue-800 md:to-purple-900 min-h-[70vh]">
 			<div class="container">
 				<div class="md:flex items-start gap-8 flex-wrap">
 					<div>
 						<p class="text-lg text-black/70 md:text-white/70 mb-8">Apa yang ingin kamu lakukan hari ini?</p>
 						<ul class="list-none features-list">
-							<li><a href="" class="features-link">Isi absensi hari ini</a></li>
-							<li><a href="" class="features-link">Buat laporan progres pekerjaan hari ini</a></li>
-							<li><a href="" class="features-link">Tambah laporan keuangan bulanan</a></li>
-							<li><a href="" class="features-link">Buat laporan kunjungan</a></li>
-							<li><a href="" class="features-link">Cek daftar inventaris kantor</a></li>
-							<li><a href="" class="features-link">Ajukan izin atau cuti</a></li>
+							<li><RouterLink to="/app/attendance" class="features-link">Isi absensi hari ini</RouterLink></li>
+							<li><RouterLink to="/app/report" href="" class="features-link">Buat laporan progres pekerjaan hari ini</RouterLink></li>
+							<li><RouterLink to="/app/finance" class="features-link">Tambah laporan keuangan bulanan</RouterLink></li>
+							<li><RouterLink to="/app/report/trip" class="features-link">Buat laporan kunjungan</RouterLink></li>
+							<li><RouterLink to="/app/inventory" class="features-link">Cek daftar inventaris kantor</RouterLink></li>
+							<li><RouterLink to="/app/report/permit" class="features-link">Ajukan izin atau cuti</RouterLink></li>
 						</ul>
 					</div>
 					<div class="hidden md:block rounded-2xl shadow bg-slate-900 card-unpadding-y ml-auto">

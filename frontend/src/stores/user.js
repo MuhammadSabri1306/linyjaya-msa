@@ -28,6 +28,8 @@ export const useUserStore = defineStore("user", {
 		logout() {
 			setSession("data-user", "");
 			this.user = {};
+			this.token = "";
+			console.log(this.token.length);
 		},
 		checkFromSession() {
 			let sessionUser = getSession("data-user");

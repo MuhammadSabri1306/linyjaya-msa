@@ -5,8 +5,8 @@ import { useUserStore } from "@/stores/user";
 import { useTimeWatcher } from "@/modules/timeWatcher";
 import { defineIdDate } from "@/modules/dateIdn";
 import SvgLjiLogo from "@/assets/SvgLjiLogo.svg";
-import { ArchiveBoxIcon, DocumentTextIcon, HandRaisedIcon, ArrowTrendingUpIcon } from "@heroicons/vue/24/outline";
-import { ArrowTopRightOnSquareIcon } from "@heroicons/vue/20/solid";
+import { ArchiveBoxIcon, DocumentTextIcon, HandRaisedIcon, ArrowTrendingUpIcon, HomeIcon } from "@heroicons/vue/24/outline";
+import { ArrowTopRightOnSquareIcon, PowerIcon } from "@heroicons/vue/20/solid";
 
 const userStore = useUserStore();
 const userData = computed(() => userStore.user);
@@ -30,6 +30,8 @@ const time = computed(() => {
 });
 
 const dateStr = defineIdDate(new Date()).toStr();
+
+const expandProfileBtn = ref(false);
 </script>
 <template>
 	<div id="baseLayout" class="flex flex-col items-stretch min-h-screen">
@@ -92,9 +94,34 @@ const dateStr = defineIdDate(new Date()).toStr();
 				</nav>
 			</div>
 		</header>
-		<header :class="clockClassVisibility" class="bg-blue-900 py-8">
+		<header class="md:hidden bg-blue-900 py-8">
 			<div class="container">
-				<p class="text-5xl md:text-7xl font-bold text-white mb-2">{{ time.hour }}<br>{{ time.minutes }}<small class="text-sm font-bold"> WITA</small></p>
+				<div class="flex justify-between items-start">
+					<RouterLink to="/" class="p-2 text-white/70 hover:text-white/90 inline-flex flex-col items-start">
+						<HomeIcon class="w-6 h-6" />
+						<span class="text-lg font-medium">Home</span>
+					</RouterLink>
+					<div class="relative">
+						<button type="button">
+							<div @click="expandProfileBtn = !expandProfileBtn" :class="{ 'opacity-0': !userData.img }" class="user-picture-sm" :style="{ backgroundImage: 'url(' + userData.img + ')' }"></div>
+						</button>
+						<div v-show="expandProfileBtn" class="absolute top-0 right-full p-4">
+							<div class="bg-white shadow rounded flex flex-col">
+								<RouterLink to="/app" class="flex items-center gap-4 px-6 py-2 text-gray-600 hover:text-gray-800 border-b">
+									<ArrowTopRightOnSquareIcon class="w-6 h-6" />
+									<small class="text-sm font-semibold whitespace-nowrap">Edit Profil</small>
+								</RouterLink>
+								<a @click="onLogOut" role="button" class="flex items-center gap-4 px-6 py-2 text-gray-600 hover:text-gray-800">
+									<PowerIcon class="w-6 h-6" />
+									<small class="text-sm font-semibold whitespace-nowrap">Logout</small>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div :class="clockClassVisibility" class="container">
+				<p class="text-5xl md:text-7xl font-bold text-white/90 mb-2">{{ time.hour }}:{{ time.minutes }}<small class="text-sm font-bold"> WITA</small></p>
 				<p class="text-white/80">{{ dateStr }}</p>
 			</div>
 		</header>
@@ -111,6 +138,11 @@ const dateStr = defineIdDate(new Date()).toStr();
 
 .user-picture {
 	@apply w-32 h-32 bg-cover bg-center bg-no-repeat rounded-full;
+	box-shadow: inset 0 0 1rem #000, 0 0 0.5rem rgba(255,255,255,0.1);
+}
+
+.user-picture-sm {
+	@apply w-16 h-16 bg-cover bg-center bg-no-repeat rounded-full border-2 border-white;
 	box-shadow: inset 0 0 1rem #000, 0 0 0.5rem rgba(255,255,255,0.1);
 }
 
