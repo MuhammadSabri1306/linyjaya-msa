@@ -34,18 +34,20 @@ const onSave = () => {
 		<template #content>
 			<form ref="formElm" method="post" class="grid grid-cols-1 gap-4 mb-4">
 				<div class="form-group">
+					<label for="selectCategory">Kategori*</label>
+					<select v-model="data.category" id="selectCategory" required>
+						<option disabled value="">Pilih Kategori</option>
+						<option v-for="item in presentCategories" :value="item.id" :disabled="item.isDone">{{ item.title }}</option>
+					</select>
+				</div>
+				<div class="form-group">
 					<label for="selectWorkStatus">Status*</label>
 					<select v-model="data.workStatus" id="selectWorkStatus" required>
 						<option disabled value="">Pilih Status</option>
 						<option>Work At Office</option>
 						<option>Work From Home</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="selectCategory">Kategori*</label>
-					<select v-model="data.category" id="selectCategory" required>
-						<option disabled value="">Pilih Kategori</option>
-						<option v-for="item in presentCategories" :value="item.id" :disabled="item.isDone">{{ item.title }}</option>
+						<option>Izin</option>
+						<option>Sakit</option>
 					</select>
 				</div>
 				<div class="form-group">

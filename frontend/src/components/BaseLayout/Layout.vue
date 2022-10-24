@@ -1,8 +1,10 @@
 <script setup>
-import { computed } from "vue";
+import { ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import SvgLjiLogo from "@/assets/SvgLjiLogo.svg";
 import { useUserStore } from "@/stores/user";
+import { useTimeWatcher } from "@/modules/timeWatcher";
+import { defineIdDate } from "@/modules/dateIdn";
+import SvgLjiLogo from "@/assets/SvgLjiLogo.svg";
 import { ArchiveBoxIcon, DocumentTextIcon, HandRaisedIcon, ArrowTrendingUpIcon } from "@heroicons/vue/24/outline";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/vue/20/solid";
 
@@ -14,6 +16,20 @@ const onLogOut = () => {
 	userStore.logout();
 	router.push("/");
 };
+
+defineProps({
+	clockClassVisibility: { type: String, default: "hidden" }
+});
+
+const timeWatcher = useTimeWatcher();
+const time = computed(() => {
+	return {
+		hour: timeWatcher.hour,
+		minutes: timeWatcher.minutes
+	}
+});
+
+const dateStr = defineIdDate(new Date()).toStr();
 </script>
 <template>
 	<div id="baseLayout" class="flex flex-col items-stretch min-h-screen">
@@ -67,7 +83,7 @@ const onLogOut = () => {
 							</RouterLink>
 						</li>
 						<li class="topnav-item">
-							<RouterLink to="/app/finance/debit">
+							<RouterLink to="/app/finance">
 								<ArrowTrendingUpIcon class="topnav-icon" />
 								<span>Laporan Finansial</span>
 							</RouterLink>
@@ -76,7 +92,13 @@ const onLogOut = () => {
 				</nav>
 			</div>
 		</header>
-		<main class="pt-16">
+		<header :class="clockClassVisibility" class="bg-blue-900 py-8">
+			<div class="container">
+				<p class="text-5xl md:text-7xl font-bold text-white mb-2">{{ time.hour }}<br>{{ time.minutes }}<small class="text-sm font-bold"> WITA</small></p>
+				<p class="text-white/80">{{ dateStr }}</p>
+			</div>
+		</header>
+		<main class="pt-16 pb-20 md:pb-0">
 			<slot></slot>
 		</main>
 	</div>

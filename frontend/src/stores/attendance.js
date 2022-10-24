@@ -23,7 +23,7 @@ const createDateTimeNow = () => {
 	const idDate = defineIdDate(new Date());
 	const day = idDate.day;
 	const date = `${ idDate.date } ${ idDate.month } ${ idDate.year }`;
-	const time = toTimeStr(idDate.dateObj);
+	const time = toTimeStr(idDate.dateObj).time;
 
 	return { day, date, time };
 };

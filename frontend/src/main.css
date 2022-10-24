@@ -23,7 +23,7 @@
 		@apply font-serif;
 	}
 
-	input:focus, textarea:focus, button:focus, select:focus {
+	input:focus, textarea:focus, button:focus, select:focus, , a:focus, a:active {
 		@apply outline-none;
 	}
 

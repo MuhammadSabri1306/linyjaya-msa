@@ -21,11 +21,14 @@ export const defineIdDate = dateObj => {
 };
 
 export const toTimeStr = (dateObj, separator = ".") => {
-	let hour = dateObj.getHours();
-	let minutes = dateObj.getMinutes();
+	let hour = dateObj.getHours().toString();
+	let minutes = dateObj.getMinutes().toString();
 
 	hour = hour.length < 2 ? `0${ hour }` : hour;
 	minutes = minutes.length < 2 ? `0${ minutes }` : minutes;
-
-	return `${ hour }${ separator }${ minutes }`;
+	
+	return {
+		time: `${ hour }${ separator }${ minutes }`,
+		hour, minutes
+	};
 };
